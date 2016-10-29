@@ -1,7 +1,7 @@
 var express = require('express');
 var mongo = require('mongodb');
 var urlapi = require('./app/urlShortener.js');
-var dburl = process.env.MONGO_URI
+var dburl = process.env.MONGO_URI;
 
 var app = express();
 
