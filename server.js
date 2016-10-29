@@ -1,7 +1,7 @@
 var express = require('express');
 var mongo = require('mongodb');
 var urlapi = require('./app/urlShortener.js');
-var dburl = 'mongodb://admin:password@ds015403.mlab.com:15403/urls'
+var dburl = 'process.env.mongoDatabase'
 
 var app = express();
 
