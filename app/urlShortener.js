@@ -24,7 +24,7 @@ var primaryURL = process.env.APP_URL || 'https://s-t.herokuapp.com/';
           "error": "Wrong URL Format, Please Try Again."  
         };
     }
-    res.send(json);
+    res.jsonp(json);
   }
   
   function shortLink(req,res)
