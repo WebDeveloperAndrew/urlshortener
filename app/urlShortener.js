@@ -1,5 +1,5 @@
 module.exports = function(app, db) {
-var primaryURL = process.env.APP_URL || 'https://s-t.herokuapp.com/';
+var primaryURL = process.env.APP_URL || 'https://urlmicro.herokuapp.com/';
 
   app.route('/:url')
   .get(shortLink);
@@ -8,12 +8,23 @@ var primaryURL = process.env.APP_URL || 'https://s-t.herokuapp.com/';
   
   function newLink(req, res)
   {
-    console.log('Requested Shortened Url: '+req.url.slice(5));
+    console.log(req.url);
+    if(removeParameter(req.url))
+    {
+      console.log("shortening");
+      var new_url = req.url.substring(0, req.url.indexOf('?'));
+      console.log(new_url);
+    }
+    else
+    {
+      new_url = req.url;
+    }
+    console.log('Requested Shortened Url: '+ new_url.slice(5));
     var json = {};
-    if(testUrl(req.url.slice(5)))
+    if(testUrl(new_url.slice(5)))
     {
         json = {
-          "originalURL": req.url.slice(5),
+          "originalURL":new_url.slice(5),
           "shortURL": primaryURL + shortURL()
         };
         saveLink(json, db);
@@ -24,7 +35,7 @@ var primaryURL = process.env.APP_URL || 'https://s-t.herokuapp.com/';
           "error": "Wrong URL Format, Please Try Again."  
         };
     }
-    res.jsonp(json);
+    res.send(json);
   }
   
   function shortLink(req,res)
@@ -69,6 +80,15 @@ var primaryURL = process.env.APP_URL || 'https://s-t.herokuapp.com/';
     //a regular expression for testing a urls validity
     var urlexpression = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i
     return urlexpression.test(url);
+  }
+  
+  function removeParameter(url)
+  {
+    if(url.search(/callback=removecallback/i) != -1)
+    {
+      return true;
+    }
+    return false;
   }
 
 };
