@@ -1,5 +1,5 @@
 module.exports = function(app, db) {
-var primaryURL = process.env.APP_URL || 'https://urlmicro.herokuapp.com/';
+var primaryURL = process.env.APP_URL || 'https://s-t.herokuapp.com/';
 
   app.route('/:url')
   .get(shortLink);
