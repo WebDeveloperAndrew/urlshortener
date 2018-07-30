@@ -1,15 +1,19 @@
 {
-  "name": "chat-example",
-  "version": "0.0.0",
-  "description": "A chat example to showcase how to use `socket.io` with a static `express` server with `async` for control flow.",
+  "name": "urlshortener",
+  "version": "1.0.0",
+  "description": "A node.js microservice that shortens urls",
   "main": "server.js",
-  "repository": "",
-  "author": "Mostafa Eweda <mo.eweda@gmail.com>",
-  "dependencies": {
-    "async": "~0.2.8",
-    "express": "^4.13.4",
-    "latest-version": "^2.0.0",
-    "socket.io": "~0.9.14",
-    "mongodb": "^2.1.4"
-  }
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebDeveloperAndrew/urlshortener.git"
+  },
+  "author": "Andrew Irwin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WebDeveloperAndrew/urlshortener/issues"
+  },
+  "homepage": "https://github.com/WebDeveloperAndrew/urlshortener#readme"
 }

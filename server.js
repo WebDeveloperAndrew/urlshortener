@@ -5,6 +5,7 @@ var dburl = process.env.MONGO_URI;
 
 var app = express();
 
+//connect to database
 mongo.MongoClient.connect(dburl, function(err, db) {
 
   if (err) {
@@ -12,7 +13,8 @@ mongo.MongoClient.connect(dburl, function(err, db) {
   } else {
     console.log('Connected to MongoDB');
   }
-  
+
+  //create collection
   db.createCollection("sites", {
     capped: true,
     size: 500000,
